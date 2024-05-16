@@ -1,4 +1,3 @@
-from algorithm import  neuronal_network
 from algorithm.neuronal_network import Neuronal
 
 input_size = 3

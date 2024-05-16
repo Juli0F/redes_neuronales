@@ -85,3 +85,21 @@ class Neuronal(object):
                 for k in range(len(self.weights[i][j])):
                     self.weights[i][j][k] -= learning_rate * activations[i][j] * deltas[i][k]
 
+
+    def calculate_loss(self, X, y):
+        total_loss = 0
+        for x, target in zip(X, y):
+            predicted = self.forward(x)[-1]
+            total_loss += sum((p - t) ** 2 for p, t in zip(predicted, target))
+        return total_loss / len(X)
+
+
+    def train(self, X, y, epochs, learning_rate):
+        for epoch in range(epochs):
+            for x, target in zip(X, y):
+                activations = self.forward(x)
+                print("Activacion Correcta[-1]:", activations[-1])
+                self.backpropagation(activations, target, learning_rate)
+            if epoch % 100 == 0:
+                print(f'Epoch {epoch}, Loss: {self.calculate_loss(X, y)}')
+
