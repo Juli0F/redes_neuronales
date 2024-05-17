@@ -106,6 +106,8 @@
       <workItem from="1715782224334" duration="2671000" />
       <workItem from="1715787067076" duration="6613000" />
       <workItem from="1715803013106" duration="8909000" />
+      <workItem from="1715895234587" duration="4465000" />
+      <workItem from="1715913190197" duration="3112000" />
     </task>
     <servers />
   </component>
@@ -113,8 +115,8 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/redes_neuronales$main.coverage" NAME="main Coverage Results" MODIFIED="1715834905935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/redes_neuronales$test.coverage" NAME="test Coverage Results" MODIFIED="1715834947980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
+    <SUITE FILE_PATH="coverage/redes_neuronales$main.coverage" NAME="main Coverage Results" MODIFIED="1715915377392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/redes_neuronales$test.coverage" NAME="test Coverage Results" MODIFIED="1715900297104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
     <SUITE FILE_PATH="coverage/redes_neuronales$neuronal_network.coverage" NAME="neuronal_network Coverage Results" MODIFIED="1715834655380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
   </component>
 </project>
