@@ -1,10 +1,13 @@
 import random
 
-
+"""
+neurona, se inicializa con sus pesos y bias de 0 a 1, 
+a cada entrada se le asigna un peso 
+"""
 class Neuron:
     def __init__(self, num_inputs, activation_func, activation_derivative):
-        self.weights = [random.uniform(-1, 1) for _ in range(num_inputs)]
-        self.bias = random.uniform(-1, 1)
+        self.weights = [random.uniform(0, 1) for _ in range(num_inputs)]
+        self.bias = random.uniform(0, 1)
         self.activation_func = activation_func
         self.activation_derivative = activation_derivative
         self.output = 0

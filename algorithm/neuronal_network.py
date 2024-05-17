@@ -40,15 +40,13 @@ class NeuralNetwork:
         return self.output_layer.activate(inputs)
 
     def backpropagate(self, inputs, expected_outputs, learning_rate):
-        outputs = self.feedforward(inputs)
+        self.feedforward(inputs)
 
         for i, neuron in enumerate(self.output_layer.neurons):
             error = expected_outputs[i] - neuron.output
             neuron.delta = error * neuron.activation_derivative(neuron.output)
         """
-        calcular el error de cada neurona en cada capa
-        y enviarlo hacia atras
-         en las capas ocultas y enviar el error hacia atra
+        error para las neuronas en las capas ocultas
         """
         for l in reversed(range(len(self.hidden_layers))):
             layer = self.hidden_layers[l]
@@ -71,7 +69,7 @@ class NeuralNetwork:
                 neuron.weights[j] += learning_rate * neuron.delta * input
             neuron.bias += learning_rate * neuron.delta
 
-    def train(self, training_data, epochs, learning_rate):
+    def train(self, training_data, epochs, learning_rate=0.1):
         for epoch in range(epochs):
             total_error = 0
             for inputs, expected_outputs in training_data:
