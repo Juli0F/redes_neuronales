@@ -41,7 +41,7 @@ def post_root(param: NeuronalRequest):
     for i in range(param.layerAmount):
         nn.add_hidden_layer(param.layers[i].neurons, param.activationFunction)
     nn.set_output_layer(param.outputFunction)
-    log = nn.train(list(zip(param.inputs, param.outputs)), 10000, 0.3)
+    log = nn.train(list(zip(param.inputs, param.outputs)), 100000, 0.2)
 
     return log
 

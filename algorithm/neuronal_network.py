@@ -39,8 +39,9 @@ class NeuralNetwork:
         return self.output_layer.activate(inputs)
 
     def backpropagate(self, inputs, expected_outputs, learning_rate):
-        self.feedforward(inputs)
+        outputs = self.feedforward(inputs)
 
+        # Calcular errores de salida
         for i, neuron in enumerate(self.output_layer.neurons):
             error = expected_outputs[i] - neuron.output
             neuron.delta = error * neuron.activation_derivative(neuron.output)
@@ -65,7 +66,7 @@ class NeuralNetwork:
             neuron.bias += learning_rate * neuron.delta
 
     def train(self, training_data, epochs, learning_rate=0.1):
-        log = ""
+        log = ''
         for epoch in range(epochs):
             total_error = 0
             for inputs, expected_outputs in training_data:
@@ -73,29 +74,32 @@ class NeuralNetwork:
                 total_error += sum(
                     (expected - output) ** 2 for expected, output in zip(expected_outputs, self.feedforward(inputs)))
             mse = total_error / len(training_data)
-            log += f'Epoch {epoch + 1}/{epochs}, MSE: {mse}\n'
+            if epoch % 1000 == 0:
+                print(f'Epoch {epoch + 1}/{epochs}, MSE: {mse}')
+                log += f'Epoch {epoch + 1}/{epochs}, MSE: {mse}'
         return log
 
     def predict(self, inputs):
         raw_output = self.feedforward(inputs)
-        return [1 if output > 0.5 else 0 for output in raw_output]
+        return [1 if output > 0.5 else 0 for output in raw_output]  # Umbral para la salida
 
 
-#
 # entradas = 3
 # salidas = 1
-# capas_ocultas = 1
-# funcion_de_activacion = 'tanh'
-# funcion_de_activacion_salida = 'identity'  # Cambiamos a sigmoid para salida
+# capas_ocultas = 4
+# funcion_de_activacion = 'sigmoid'
+# funcion_de_activacion_salida = 'identity'
 # epocas = 10000
 #
-# # Datos de entrenamiento para la operación XOR
 # training_data = [
 #     ([0, 0, 0], [0]),
 #     ([0, 0, 1], [1]),
 #     ([0, 1, 0], [1]),
 #     ([0, 1, 1], [0]),
 #     ([1, 0, 0], [1]),
+#     ([1, 0, 1], [0]),
+#     ([1, 1, 0], [0]),
+#     ([1, 1, 1], [1])
 # ]
 #
 # test_data = [
@@ -109,17 +113,12 @@ class NeuralNetwork:
 #     [1, 1, 1]
 # ]
 #
-#
 # nn = NeuralNetwork(entradas, salidas)
-# nn.add_hidden_layer(2, funcion_de_activacion)
+# nn.add_hidden_layer(capas_ocultas, funcion_de_activacion)
+# nn.add_hidden_layer(capas_ocultas, funcion_de_activacion)  # Añadimos otra capa oculta
 # nn.set_output_layer(funcion_de_activacion_salida)
 # nn.train(training_data, epocas, learning_rate=0.2)
-#
 #
 # for test_input in test_data:
 #     output = nn.predict(test_input)
 #     print(f'Input: {test_input} -> Output: {output}')
-#
-# print("x"*10)
-# print("x"*10)
-# print("x"*10)
