@@ -1,5 +1,4 @@
-
-from algorithm.activation_function  import ActivationFunction
+from algorithm.activation_function import ActivationFunction
 from algorithm.layer import Layer
 
 
@@ -41,7 +40,6 @@ class NeuralNetwork:
     def backpropagate(self, inputs, expected_outputs, learning_rate):
         outputs = self.feedforward(inputs)
 
-        # Calcular errores de salida
         for i, neuron in enumerate(self.output_layer.neurons):
             error = expected_outputs[i] - neuron.output
             neuron.delta = error * neuron.activation_derivative(neuron.output)
@@ -71,18 +69,31 @@ class NeuralNetwork:
             total_error = 0
             for inputs, expected_outputs in training_data:
                 self.backpropagate(inputs, expected_outputs, learning_rate)
-                total_error += sum(
-                    (expected - output) ** 2 for expected, output in zip(expected_outputs, self.feedforward(inputs)))
+                total_error += self.mse(expected_outputs, self.feedforward(inputs))
             mse = total_error / len(training_data)
             if epoch % 1000 == 0:
                 print(f'Epoch {epoch + 1}/{epochs}, MSE: {mse}')
                 log += f'Epoch {epoch + 1}/{epochs}, MSE: {mse}'
         return log
 
+    def mse(self, expected_outputs, actual_outputs):
+        mse_sum = 0
+
+        for expected, actual in zip(expected_outputs, actual_outputs):
+            error = expected - actual
+            squared_error = error * error
+            mse_sum += squared_error
+
+        if len(expected_outputs) > 0:
+            mse = mse_sum / len(expected_outputs)
+        else:
+            mse = 0
+
+        return mse
+
     def predict(self, inputs):
         raw_output = self.feedforward(inputs)
         return [1 if output > 0.5 else 0 for output in raw_output]  # Umbral para la salida
-
 
 # entradas = 3
 # salidas = 1
