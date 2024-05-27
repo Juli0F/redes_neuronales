@@ -1,32 +1,34 @@
 import math
-
 class ActivationFunction:
-
-    def __init__(self):
-        pass
-
-
-    def sigmoid(self, x):
+    @staticmethod
+    def sigmoid(x):
         return 1 / (1 + math.exp(-x))
 
-    def sigmoid_derivative(self, x):
-        return self.sigmoid(x) * (1 - self.sigmoid(x))
+    @staticmethod
+    def sigmoid_derivative(x):
+        return x * (1 - x)
 
-    def tanh(self, x):
+    @staticmethod
+    def tanh(x):
         return math.tanh(x)
 
-    def tanh_derivative(self, x):
-        return 1 - math.tanh(x) ** 2
+    @staticmethod
+    def tanh_derivative(x):
+        return 1 - x**2
 
-    def identity(self, x):
+    @staticmethod
+    def identity(x):
         return x
 
-    def identity_derivative(self, x):
+    @staticmethod
+    def identity_derivative(x):
         return 1
 
-    def step(self, x):
-        return 1 if x > 0 else 0
+    @staticmethod
+    def step(x):
+        return 1 if x >= 0 else 0
 
-    def step_derivative(self, x):
+    @staticmethod
+    def step_derivative(x):
         return 0
 

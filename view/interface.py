@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox, ttk
+# from neuronal_network import NeuralNetwork
 from algorithm.neuronal_network import NeuralNetwork
-
 
 class NeuralNetworkApp:
     def __init__(self, root):

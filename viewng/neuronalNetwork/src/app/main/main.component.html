@@ -1,0 +1,203 @@
+<p-card class="mt-4">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="inputNodes">Entradas</label>
+        <input
+          type="number"
+          id="inputNodes"
+          class="form-control"
+          [(ngModel)]="inputConfig"
+          (ngModelChange)="inputConfigChange()"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="outputNodes">Salidas</label>
+        <input
+          type="number"
+          id="outputNodes"
+          class="form-control"
+          [(ngModel)]="outputConfig"
+          (ngModelChange)="outputConfigChange()"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="hiddenLayers">Capas Ocultas</label>
+        <input
+          type="number"
+          id="hiddenLayers"
+          class="form-control"
+          [(ngModel)]="hiddenLayerConfig"
+          (ngModelChange)="onHiddenLayerConfigChange()"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="testCases">Número de Pruebas</label>
+        <input
+          type="number"
+          id="testCases"
+          class="form-control"
+          [(ngModel)]="testCaseConfig"
+          (ngModelChange)="testConfigChange()"
+        />
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <label for="activationFunction">Función de Activación</label>
+        <select
+          id="activationFunction"
+          class="form-control"
+          [(ngModel)]="activationFunction"
+        >
+          <option value="tanh">tanh</option>
+          <option value="sigmoid">sigmoide</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="outputFunction">Función de Salida</label>
+        <select
+          id="outputFunction"
+          class="form-control"
+          [(ngModel)]="outputFunction"
+        >
+          <option value="step">step</option>
+          <option value="identity">identity</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <h3>Neurons by Layer</h3>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th>Layer</th>
+              <th>Neurons</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let layer of layers">
+              <td>{{ layer.layer + 1 }}</td>
+              <td><input type="number" class="form-control" [(ngModel)]="layer.neurons" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-8">
+        <h3>Test Cases input</h3>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th *ngFor="let i of inputs">Input {{ i + 1 }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of test; let rowIndex = index">
+              <td *ngFor="let i of inputs; let colIndex = index">
+                <input type="number" class="form-control" [(ngModel)]="testInputs[rowIndex][colIndex]" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!---------------------------------------output ----------------------->
+
+      <div class="col-4">
+        <h3>Test Cases output</h3>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th *ngFor="let i of outputs">Output {{ i + 1 }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of test; let rowIndex = index">
+              <td *ngFor="let i of outputs; let colIndex = index">
+                <input type="number" class="form-control" [(ngModel)]="testOutputs[rowIndex][colIndex]" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="row ">
+    <div class="col-12 d-flex justify-content-end mt-4">
+      <p-button label="Entrenar" (onClick)="train()" />
+    </div>
+  </div>
+</p-card>
+
+<p-card  class="mt-4">
+  <div class="row">
+    <div class="col-10">
+      <textarea name="console" id="console" cols="80" rows="20" [value]="log" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <label for="predictCases">Predecir para</label>
+      <input
+        type="number"
+        id="predictCases"
+        class="form-control"
+        [(ngModel)]="predictConfig"
+        (ngModelChange)="predictConfigChange()"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-8">
+      <h3>Predict Cases Input</h3>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th *ngFor="let i of inputs">Input {{ i + 1 }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of predict; let rowIndex = index">
+            <td *ngFor="let i of inputs; let colIndex = index">
+              <input type="number" class="form-control" [(ngModel)]="predictInputs[rowIndex][colIndex]" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!---------------------------------------output ----------------------->
+
+    <div class="col-4">
+      <h3>Predict Cases Output</h3>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th *ngFor="let i of outputs">Output {{ i + 1 }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of predict; let rowIndex = index">
+            <td *ngFor="let i of outputs; let colIndex = index">
+              <input type="number" class="form-control" [value]="predictOutputs[rowIndex][colIndex]" readonly/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+
+  <div class="row ">
+    <div class="col-12 d-flex justify-content-end mt-4">
+      <p-button label="Testear" (onClick)="testValues()" />
+    </div>
+  </div>
+</p-card>

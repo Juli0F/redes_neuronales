@@ -1,0 +1,19 @@
+.p-grid {
+    margin-top: 20px;
+  }
+  
+  .p-col-12, .p-col-4 {
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
